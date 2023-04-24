@@ -36,8 +36,9 @@ if __name__ == "__main__":
         if not isSame(quesImg, tmpQuesImg):
             quesImg, optionImg = tmpQuesImg, tmpOptionImg
             ques, option = ocr.run(quesImg, optionImg)
-            answer = helper.getAnswer(ques, option)
+            answer = helper.answer(ques, option)
             print("问题: {}".format(ques))
+            print("选项: {}".format(option))
             print("正确答案: {}".format(answer))
             print()
             print("-----------------")
