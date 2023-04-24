@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import win32gui, win32con
+import win32gui
 from PIL import ImageGrab
+
 
 class ScreenCapture:
     def __init__(self):
@@ -13,34 +14,23 @@ class ScreenCapture:
     # rpx转px
     def _rpx2px(self, base):
         ratio = base / 750
+
         def _rpx(rpx):
             return rpx * ratio
+
         return _rpx
 
     # 截图
     def _getCapture(self):
         img = ImageGrab.grab(self.bound)
         return img
-    
+
     # 切割
     def _splitCapture(self, img):
         quesImg = img.crop((self.rpx(85), self.rpx(460), self.rpx(670), self.rpx(590)))
         ansImg = img.crop((self.rpx(85), self.rpx(590), self.rpx(670), self.rpx(1055)))
         return quesImg, ansImg
-    
-    
+
     def run(self):
         img = self._getCapture()
         return self._splitCapture(img)
-        
-
-
-        
-
-        
-        
-
-        
-
-
-

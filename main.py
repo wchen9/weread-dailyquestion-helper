@@ -4,9 +4,9 @@ import time
 
 from PIL import ImageChops
 
-from process.ScreenCapture import ScreenCapture
 from process.OCR import OCR
-from process.Query import Query
+from process.OpenAIHelper import OpenAIHelper
+from process.ScreenCapture import ScreenCapture
 
 
 def isSame(imgA, imgB):
@@ -28,25 +28,17 @@ if __name__ == "__main__":
 
     sc = ScreenCapture()
     ocr = OCR(config["APP_ID"], config["API_KEY"], config["SECRET_KEY"])
-    query = Query()
 
-    quesImg, answImg = None, None
-
+    quesImg, optionImg = None, None
+    helper = OpenAIHelper(config["OPENAI_KEY"])
     while True:
-        tmpQuesImg, tmpAnswImg = sc.run()
+        tmpQuesImg, tmpOptionImg = sc.run()
         if not isSame(quesImg, tmpQuesImg):
-            quesImg, answImg = tmpQuesImg, tmpAnswImg
-            ques, answ = ocr.run(quesImg, answImg)
-            freq, rightAnswer, hint = query.run(ques, answ)
+            quesImg, optionImg = tmpQuesImg, tmpOptionImg
+            ques, option = ocr.run(quesImg, optionImg)
+            answer = helper.getAnswer(ques, option)
             print("问题: {}".format(ques))
-            print("正确答案: {}".format(rightAnswer))
-            freqText = ''
-            for index in range(len(freq)):
-                freqText += (answ[index] + ' :' + str(round(100 * freq[index], 1)) + '%    ')
-            print('概率: {}'.format(freqText))
-            print('依据: {}'.format(hint))
+            print("正确答案: {}".format(answer))
             print()
-            print('-----------------')
+            print("-----------------")
         time.sleep(0.8)
-            
-            

@@ -1,5 +1,6 @@
 {
     "APP_ID": "xxx",
     "API_KEY": "xxx",
-    "SECRET_KEY": "xxx"
+    "SECRET_KEY": "xxx",
+    "OPENAI_KEY": "xxx"
 }

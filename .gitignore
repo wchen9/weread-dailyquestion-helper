@@ -4,4 +4,4 @@
 /*.png
 config.json
 *test.py
- 
+.venv/
