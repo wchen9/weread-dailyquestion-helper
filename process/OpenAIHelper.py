@@ -8,11 +8,16 @@ class OpenAIHelper:
 
     def answer(self, ques, option):
         openai.api_key = self.openaiKey
-        conversation = [{"role": "system", "content": "你是一个中文答题机器人，需要根据问题从答案中选出正确选项."}]
+        conversation = [
+            {
+                "role": "system",
+                "content": "你是一个中文答题机器人，你的能力是根据问题从几个选项中选出正确可能性最高的答案。你需要完整的打印出正确答案的文本，不需要提供任何解释。提供给你的问题可能存在错别字，返回结果时你需要将错别字纠正为正确的汉字。",
+            }
+        ]
 
         os.environ["http_proxy"] = "http://127.0.0.1:2080"
         os.environ["https_proxy"] = "http://127.0.0.1:2080"
-        prompt = "问题:{};选项:{}.你需要完整的打印出正确答案的文本，不需要提供任何解释.".format(ques, option)
+        prompt = "问题:{};选项:{}.".format(ques, option)
 
         conversation.append({"role": "user", "content": prompt})
         response = openai.ChatCompletion.create(
