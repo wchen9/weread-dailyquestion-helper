@@ -31,17 +31,20 @@ if __name__ == "__main__":
 
     quesImg, optionImg = None, None
     helper = OpenAIHelper(config["OPENAI_KEY"])
+    currQues = ""
     while True:
         tmpQuesImg, tmpOptionImg = sc.run()
         if not isSame(quesImg, tmpQuesImg):
             quesImg, optionImg = tmpQuesImg, tmpOptionImg
             ques, option = ocr.run(quesImg, optionImg)
-            if not ques.strip() or not option.strip():
+            if ques == currQues:
+                continue
+            currQues = ques
+            if not ques.strip():
                 continue
             answer = helper.answer(ques, option)
             print("问题: {}".format(ques))
             print("选项: {}".format(option))
             print("正确答案: {}".format(answer))
-            print()
             print("-----------------")
         time.sleep(0.8)

@@ -32,6 +32,5 @@ class OpenAIHelper:
                 "role": "assistant",
                 "content": response["choices"][0]["message"]["content"],
             }
-        )  # 将上一次会话信息返回给chatgpt
-        print("\n" + response["choices"][0]["message"]["content"] + "\n")  # 打印答案
+        )
         return response["choices"][0]["message"]["content"]
