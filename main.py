@@ -46,9 +46,9 @@ if __name__ == "__main__":
             currOptions = option
             if not ques.strip():
                 continue
-            answer = helper.answer(ques, option)
             print("问题: {}".format(ques))
             print("选项: {}".format(option))
+            answer = helper.answer(ques, option)
             print("正确答案: {}".format(answer))
             print("-----------------")
         time.sleep(0.8)
