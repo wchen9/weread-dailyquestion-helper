@@ -49,6 +49,6 @@ if __name__ == "__main__":
             print("问题: {}".format(ques))
             print("选项: {}".format(option))
             answer = helper.answer(ques, option)
-            print("正确答案: {}".format(answer))
+            print(answer)
             print("-----------------")
         time.sleep(0.8)
