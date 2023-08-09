@@ -42,6 +42,8 @@ if __name__ == "__main__":
                 continue
             if option == currOptions:
                 continue
+            if len(option) == 0:
+                continue
             currQues = ques
             currOptions = option
             if not ques.strip():

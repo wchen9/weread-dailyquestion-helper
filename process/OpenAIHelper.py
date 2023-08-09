@@ -36,8 +36,8 @@ class OpenAIHelper:
 
         下面用```符号包住的部分是问题和答案，请按步骤给出结果。"""
 
-        os.environ["http_proxy"] = "http://127.0.0.1:2080"
-        os.environ["https_proxy"] = "http://127.0.0.1:2080"
+        os.environ["http_proxy"] = "http://127.0.0.1:7890"
+        os.environ["https_proxy"] = "http://127.0.0.1:7890"
         prompt = f"{prompt_prefix}```问题:{ques};选项:{option}.```"
         conversation = [{"role": "user", "content": prompt}]
         response = openai.ChatCompletion.create(

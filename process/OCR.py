@@ -20,5 +20,8 @@ class OCR:
         ques = self._ocr(quesImg)
         option = self._ocr(optionImg)
         ques = "".join([item["words"] for item in ques["words_result"]])
-        option = [item["words"] for item in option["words_result"]]
+        try:
+            option = [item["words"] for item in option["words_result"]]
+        except:
+            option = []
         return ques, option
